@@ -1,5 +1,5 @@
 import json
-from service_rest.models import Technician, Appointment
+from service.api.service_rest.api_models import Technician, Appointment
 from django.test import TransactionTestCase, Client
 
 
