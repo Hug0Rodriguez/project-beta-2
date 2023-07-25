@@ -2,53 +2,14 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
-from common.json import ModelEncoder
 from .models import Salesperson, Sale, Customer, AutomobileVO
+from .encoders import (
+    SaleListEncoder,
+    SalespersonListEncoder,
+    CustomerListEncoder,
+)
 
 # Create your views here.
-
-
-class AutomobileVODetailEncoder(ModelEncoder):
-    model = AutomobileVO
-    properties = [
-        "vin",
-        "sold",
-        "import_href",
-    ]
-
-
-class SalespersonListEncoder(ModelEncoder):
-    model = Salesperson
-    properties = [
-        "first_name",
-        "last_name",
-        "employee_id",
-        "id",
-    ]
-
-
-class CustomerListEncoder(ModelEncoder):
-    model = Customer
-    properties = [
-        "first_name",
-        "last_name",
-        "address",
-        "phone_number",
-        "id",
-    ]
-
-
-class SaleListEncoder(ModelEncoder):
-    model = Sale
-    properties = [
-        "price",
-        "id",
-    ]
-    encoders = {
-        "automobile": AutomobileVODetailEncoder(),
-        "salesperson": SalespersonListEncoder(),
-        "customer": CustomerListEncoder(),
-    }
 
 
 @require_http_methods(["GET", "POST"])
@@ -103,7 +64,7 @@ def delete_customer(request, pk):
         return JsonResponse({"deleted": count > 0})
 
 
-@require_http_methods(["Get", "POST"])
+@require_http_methods(["GET", "POST"])
 def list_sales(request, automobile_vo_id=None):
     if request.method == "GET":
         if automobile_vo_id is not None:

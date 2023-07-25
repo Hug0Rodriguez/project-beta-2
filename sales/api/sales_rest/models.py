@@ -7,12 +7,18 @@ class Salesperson(models.Model):
     last_name = models.CharField(max_length=200)
     employee_id = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.last_name
+
 
 class Customer(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     phone_number = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.first_name
 
 
 class AutomobileVO(models.Model):
@@ -36,7 +42,7 @@ class Sale(models.Model):
         on_delete=models.CASCADE,
     )
 
-    Customer = models.ForeignKey(
+    customer = models.ForeignKey(
         Customer,
         related_name="sales",
         on_delete=models.CASCADE,
