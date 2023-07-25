@@ -8,7 +8,7 @@ class Technician(models.Model):
 
 
 class AutomobileVO(models.Model):
-    vin = models.CharField(null=True, blank=True, max_length=17, unique=True)
+    vin = models.CharField(null=True, blank=True, max_length=17)
     sold = models.BooleanField(default=False)
 
 
@@ -22,11 +22,4 @@ class Appointment(models.Model):
         Technician,
         related_name="appointment",
         on_delete=models.CASCADE
-    )
-    automobile = models.ForeignKey(
-        AutomobileVO,
-        related_name="appointment",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
     )

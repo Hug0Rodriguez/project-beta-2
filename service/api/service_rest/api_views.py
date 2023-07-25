@@ -9,30 +9,25 @@ import json
 class TechnicianListEncoder(ModelEncoder):
     model = Technician
     properties = ["first_name", "last_name", "employee_id"]
-    
-    
+
+
 class TechnicianDetailEncoder(ModelEncoder):
     model = Technician
     properties = ["first_name", "last_name", "employee_id"]
 
 
-class AutomobileVODetailEncoder(ModelEncoder):
-    model = AutomobileVO
-    properties = ["sold"]
-
-
 class AppointmentListEncoder(ModelEncoder):
     model = Appointment
-    properties = ["id", "date_time", "reason", "status", "vin", "customer", "technician", "automobile"]
-    
+    properties = ["id", "date_time", "reason", "status", "vin", "customer", "technician"]
+
     encoders = {
         "technician": TechnicianListEncoder(),
-        "automobile": AutomobileVODetailEncoder()
     }
 
 
 @require_http_methods(["GET", "POST"])
 def api_list_technicians(request):
+
     if request.method == "GET":
         technicians = Technician.objects.all()
         return JsonResponse(
@@ -47,8 +42,8 @@ def api_list_technicians(request):
             encoder=TechnicianDetailEncoder,
             safe=False,
             )
-    
-    
+
+
 def api_delete_technician(request, id):
     if request.method == "DELETE":
         technician = get_object_or_404(Technician, id=id)
@@ -69,9 +64,6 @@ def api_list_appointments(request):
         )
     else:
         content = json.loads(request.body)
-        if "automobile" not in content:
-            new_automobile = AutomobileVO.objects.create(vin=content["vin"], sold=False)
-            content["automobile"] = new_automobile
         try:
             technician = Technician.objects.get(employee_id=content["technician"])
             content["technician"] = technician
