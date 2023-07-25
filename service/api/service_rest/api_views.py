@@ -9,8 +9,8 @@ import json
 class TechnicianListEncoder(ModelEncoder):
     model = Technician
     properties = ["first_name", "last_name", "employee_id"]
-
-
+    
+    
 class TechnicianDetailEncoder(ModelEncoder):
     model = Technician
     properties = ["first_name", "last_name", "employee_id"]
@@ -18,7 +18,7 @@ class TechnicianDetailEncoder(ModelEncoder):
 
 class AutomobileVODetailEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["vin", "sold"]
+    properties = ["sold"]
 
 
 class AppointmentListEncoder(ModelEncoder):
@@ -29,12 +29,10 @@ class AppointmentListEncoder(ModelEncoder):
         "technician": TechnicianListEncoder(),
         "automobile": AutomobileVODetailEncoder()
     }
-    
 
 
 @require_http_methods(["GET", "POST"])
 def api_list_technicians(request):
-
     if request.method == "GET":
         technicians = Technician.objects.all()
         return JsonResponse(
@@ -49,8 +47,8 @@ def api_list_technicians(request):
             encoder=TechnicianDetailEncoder,
             safe=False,
             )
-
-
+    
+    
 def api_delete_technician(request, id):
     if request.method == "DELETE":
         technician = get_object_or_404(Technician, id=id)
@@ -63,7 +61,6 @@ def api_delete_technician(request, id):
 
 @require_http_methods(["GET", "POST"])
 def api_list_appointments(request):
-
     if request.method == "GET":
         appointments = Appointment.objects.all()
         return JsonResponse(
@@ -72,6 +69,9 @@ def api_list_appointments(request):
         )
     else:
         content = json.loads(request.body)
+        if "automobile" not in content:
+            new_automobile = AutomobileVO.objects.create(vin=content["vin"], sold=False)
+            content["automobile"] = new_automobile
         try:
             technician = Technician.objects.get(employee_id=content["technician"])
             content["technician"] = technician
@@ -94,6 +94,7 @@ def api_delete_appointment(request, id):
         appointment.delete()
         return JsonResponse(
             {"message": f"The appointment at id {id} has been deleted"},
+            status=200
         )
 
 
@@ -103,7 +104,8 @@ def api_cancel_appointment(request, id):
         appointment.status = "canceled"
         appointment.save()
         return JsonResponse(
-            {"message": f"{appointment.customer}'s appointment has been canceled"}
+            {"message": f"{appointment.customer}'s appointment has been canceled"},
+            status=200
         )
 
 
@@ -113,5 +115,6 @@ def api_finish_appointment(request, id):
         appointment.status = "finished"
         appointment.save()
         return JsonResponse(
-            {"message": f"{appointment.customer}'s appointment has been finished"}
+            {"message": f"{appointment.customer}'s appointment has been finished"},
+            status=200
         )
