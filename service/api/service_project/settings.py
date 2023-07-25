@@ -51,6 +51,7 @@ MIDDLEWARE = [
 
 ALLOWED_HOSTS = [
     "localhost",
+    "inventory-api",
     "http://localhost:8080",
 ]
 
