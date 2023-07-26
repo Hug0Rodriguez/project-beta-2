@@ -8,3 +8,19 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+async function SalespeopleList() {
+  const response = await fetch('http://localhost:8090/api/salespeople/');
+  if (response.ok) {
+    const data = await response.json();
+    root.render(
+      <React.StrictMode>
+        <App salespeople={data.salespeople} />
+      </React.StrictMode>
+    );
+  } else {
+    console.error('Error fetching salesPeople data');
+  }
+}
+
+SalespeopleList();
