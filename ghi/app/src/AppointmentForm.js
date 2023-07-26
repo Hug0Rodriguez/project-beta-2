@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
+
 export default function AppointmentForm() {
     const [technicians, setTechnicians] = useState([])
     const [vin, setVin] = useState('')
@@ -7,8 +8,6 @@ export default function AppointmentForm() {
     const [dateTime, setDateTime] = useState('')
     const [technician, setTechnician] = useState('')
     const [reason, setReason] = useState('')
-
-
     const fetchData = async () => {
         const url = 'http://localhost:8080/api/technicians/'
 
@@ -17,7 +16,6 @@ export default function AppointmentForm() {
         if (response.ok) {
             const data = await response.json();
             setTechnicians(data["technicians"])
-            console.log(technicians)
         }
     }
     function handleTechnicianChange(e) {
@@ -35,11 +33,9 @@ export default function AppointmentForm() {
     function handleReasonChange(e) {
         setReason(e.target.value)
     }
-
     useEffect(() => {
         fetchData();
     }, []);
-
     async function handleSubmit(e) {
         e.preventDefault()
         const data = {}
@@ -65,8 +61,10 @@ export default function AppointmentForm() {
             setCustomer('')
             setDateTime('')
             setTechnician('')
+            setReason('')
         }
     }
+
     return (
         <div className="row">
             <div className="offset-3 col-6">
@@ -86,7 +84,7 @@ export default function AppointmentForm() {
                             <label htmlFor="pictureUrl">Date & Time...</label>
                         </div>
                         <div className="mb-3">
-                            <select value={technician.employee_id} onChange={handleTechnicianChange} name="technician" className="form-select" required>
+                            <select value={technician} onChange={handleTechnicianChange} name="technician" className="form-select" required>
                                 <option value="">Choose a technician...</option>
                                 {technicians.map(technician => {
                                     return (<option value={technician.employee_id} key={technician.employee_id}>{`${technician.first_name} ${technician.last_name}`}</option>)

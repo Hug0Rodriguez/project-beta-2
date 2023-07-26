@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 
 export default function AppointmentList() {
     const [appointments, setAppointments] = useState([])
+    const [automobiles, setAutomobiles] = useState([])
     async function fetchAppointments() {
         const response = await fetch('http://localhost:8080/api/appointments/')
         console.log(response)
@@ -15,6 +16,17 @@ export default function AppointmentList() {
     useEffect(() => {
         fetchAppointments()
     }, [])
+    useEffect(() => {
+        fetchAutomobiles()
+    }, [])
+
+    async function fetchAutomobiles() {
+        const secondResponse = await fetch(`http://localhost:8100/api/automobiles/`)
+        if (secondResponse.ok) {
+            const data = await secondResponse.json()
+            setAutomobiles(data.autos)
+        }
+    }
 
     async function cancelAppointment(id) {
         const cancelUrl = `http://localhost:8080/api/appointments/${id}/cancel`
@@ -56,6 +68,15 @@ export default function AppointmentList() {
         }
     }
 
+    function soldStatus(vin) {
+        for (let auto of automobiles) {
+            console.log("HERE ARE THE AUTOS FROM THE INVENTORY", auto)
+            if (vin === auto["vin"] && auto["sold"] === true) {
+                return "Yes"
+            }
+        } return "No"
+    }
+
     return (
         <>
             <h1 style={{ marginTop: '10px ' }}>Service Appointments</h1>
@@ -63,6 +84,7 @@ export default function AppointmentList() {
                 <thead>
                     <tr>
                         <th scope="col">VIN</th>
+                        <th scope="col">Is VIP?</th>
                         <th scope="col">Customer name</th>
                         <th scope="col">Date and Time</th>
                         <th scope="col">Technician</th>
@@ -75,6 +97,7 @@ export default function AppointmentList() {
                             return (
                                 <tr key={appointment.id}>
                                     <td>{appointment.vin}</td>
+                                    <td>{soldStatus(appointment.vin)}</td>
                                     <td> {appointment.customer}</td>
                                     <td> {appointment.date_time}</td>
                                     <td> {`${appointment.technician.first_name} ${appointment.technician.last_name}`}</td>

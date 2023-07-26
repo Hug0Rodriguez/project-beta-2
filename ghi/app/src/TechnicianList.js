@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
+
 export default function TechnicianList() {
     const [technicians, setTechnicians] = useState([])
     async function fetchTechnicians() {
@@ -16,6 +17,8 @@ export default function TechnicianList() {
     }, [])
 
     return (
+        <>
+        <h1 style={{ marginTop: '10px'}}>Technicians</h1>
         <table className="table table-striped">
             <thead>
                 <tr>
@@ -27,7 +30,7 @@ export default function TechnicianList() {
             <tbody>
                 {technicians.map(technician => {
                     return (
-                        <tr key={technician.id}>
+                        <tr key={technician.employee_id}>
                             <td> {technician.employee_id}</td>
                             <td> {technician.first_name}</td>
                             <td> {technician.last_name}</td>
@@ -36,5 +39,6 @@ export default function TechnicianList() {
                 })}
             </tbody>
         </table>
+        </>
     )
 }

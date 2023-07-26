@@ -6,8 +6,6 @@ export default function ModelForm() {
     const [model, setModel] = useState('')
     const [pictureUrl, setPictureUrl] = useState('')
     const [manufacturer, setManufacturer] = useState('')
-
-
     const fetchData = async () => {
         const url = 'http://localhost:8100/api/manufacturers/'
 
@@ -28,7 +26,6 @@ export default function ModelForm() {
     function handlePictureUrlChange(e) {
         setPictureUrl(e.target.value)
     }
-
     useEffect(() => {
         fetchData();
     }, []);
@@ -57,6 +54,7 @@ export default function ModelForm() {
             setPictureUrl('')
         }
     }
+
     return(
     <div className="row">
     <div className="offset-3 col-6">
@@ -72,7 +70,7 @@ export default function ModelForm() {
                     <label htmlFor="pictureUrl">Picture URL...</label>
                 </div>
                 <div className="mb-3">
-                                        <select value={manufacturer.id} onChange={handleManufacturerChange} name="manufacturer" id="manufacturer" className="form-select" required>
+                                        <select value={manufacturer} onChange={handleManufacturerChange} name="manufacturer" id="manufacturer" className="form-select" required>
                                             <option value="">Choose a manufacturer...</option>
                                             {manufacturers.map(manufacturer => {
                                                 return (<option value={manufacturer.id} key={manufacturer.id}>{manufacturer.name}</option>)
