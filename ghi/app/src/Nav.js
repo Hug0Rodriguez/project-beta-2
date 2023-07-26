@@ -12,6 +12,7 @@ function Nav() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
                 <NavLink className="nav-link active" aria-current="page" to="create">Add a Sales Person</NavLink>
+                <NavLink className="nav-link active" aria-current="page" to="addcustomer">Add a Customer</NavLink>
             </li>
           </ul>
         </div>
