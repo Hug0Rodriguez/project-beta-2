@@ -105,6 +105,8 @@ export default function AppointmentList() {
                                     <td><button className="btn btn-danger" onClick={() => cancelAppointment(appointment.id)}>Cancel</button><button className="btn btn-success" onClick={() => finishAppointment(appointment.id)}>Finished</button></td>
                                 </tr>
                             )
+                        } else {
+                            return null;
                         }
                     })}
                 </tbody>
