@@ -1,33 +1,13 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Technician, AutomobileVO, Appointment
+from django.shortcuts import get_object_or_404
+from .models import Technician, Appointment
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from common.json import ModelEncoder
+from .encoders import TechnicianListEncoder, TechnicianDetailEncoder, AppointmentListEncoder
 import json
-
-
-class TechnicianListEncoder(ModelEncoder):
-    model = Technician
-    properties = ["first_name", "last_name", "employee_id"]
-
-
-class TechnicianDetailEncoder(ModelEncoder):
-    model = Technician
-    properties = ["first_name", "last_name", "employee_id"]
-
-
-class AppointmentListEncoder(ModelEncoder):
-    model = Appointment
-    properties = ["id", "date_time", "reason", "status", "vin", "customer", "technician"]
-
-    encoders = {
-        "technician": TechnicianListEncoder(),
-    }
 
 
 @require_http_methods(["GET", "POST"])
 def api_list_technicians(request):
-
     if request.method == "GET":
         technicians = Technician.objects.all()
         return JsonResponse(
@@ -49,7 +29,7 @@ def api_delete_technician(request, id):
         technician = get_object_or_404(Technician, id=id)
         technician.delete()
         return JsonResponse(
-            {"message": f"The technician at id {id} has been deleted"},
+            {"message": f"The technician at id: {id} has been deleted"},
             status=200
         )
 
@@ -85,7 +65,7 @@ def api_delete_appointment(request, id):
         appointment = get_object_or_404(Appointment, id=id)
         appointment.delete()
         return JsonResponse(
-            {"message": f"The appointment at id {id} has been deleted"},
+            {"message": f"The appointment at id: {id} has been deleted"},
             status=200
         )
 
@@ -107,6 +87,6 @@ def api_finish_appointment(request, id):
         appointment.status = "finished"
         appointment.save()
         return JsonResponse(
-            {"message": f"{appointment.customer}'s appointment has been finished"},
+            {"message": f"{appointment.customer}'s appointment is finished"},
             status=200
         )
