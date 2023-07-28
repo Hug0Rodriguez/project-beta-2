@@ -6,7 +6,9 @@ import ListSalesPeople from './ListSalesPeople';
 import AddCustomer from './AddCustomer';
 import ListCustomers from './ListCustomers';
 import SaleForm from './NewSale';
-
+import ListSales from './SalesList';
+import SalespersonHistory from './SalesPersonHistory';
+import ListAutomobiles from './AutomobileList';
 function App(props) {
   return (
     <BrowserRouter>
@@ -19,10 +21,14 @@ function App(props) {
           <Route path="addcustomer" element={<AddCustomer/>}/>
           <Route path="customerlist" element={<ListCustomers customers={props.customers}/>}></Route>
           <Route path="salesform" element={<SaleForm/>}/>
+          <Route path="saleslist" element={<ListSales sales={props.sales}/>}></Route>
+          <Route path="salespersonhistory" element={<SalespersonHistory/>}/>
+          <Route path="automobilelist" element={<ListAutomobiles automobiles={props.automobiles}/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>
   );
 }
+import ListAutomobiles from './AutomobileList';
 
 export default App;

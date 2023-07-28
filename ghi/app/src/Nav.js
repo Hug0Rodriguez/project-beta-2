@@ -15,6 +15,7 @@ function Nav() {
                 <NavLink className="nav-link active" aria-current="page" to="addcustomer">Add a Customer</NavLink>
                 <NavLink className="nav-link active" aria-current="page" to="customerlist">Customer List</NavLink>
                 <NavLink className="nav-link active" aria-current="page" to="salespeople">Sales People List</NavLink>
+                <NavLink className="nav-link active" aria-current="page" to="saleslist">Sales List</NavLink>
             </li>
           </ul>
         </div>
