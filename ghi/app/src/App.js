@@ -10,6 +10,16 @@ import ListSales from './SalesList';
 import SalespersonHistory from './SalesPersonHistory';
 import ListAutomobiles from './AutomobileList';
 import AutomobileForm from './AutomobileForm';
+import ManufacturerList from './ManufacturerList';
+import ManufacturerForm from './ManufacturerForm';
+import ModelList from './ModelList';
+import ModelForm from './ModelForm';
+import TechnicianList from './TechnicianList';
+import TechnicianForm from './TechnicianForm';
+import AppointmentList from './AppointmentList';
+import AppointmentForm from './AppointmentForm';
+import ServiceHistoryList from './ServiceHistoryList';
+
 
 function App(props) {
   return (
@@ -27,6 +37,15 @@ function App(props) {
           <Route path="salespersonhistory" element={<SalespersonHistory/>}/>
           <Route path="automobilelist" element={<ListAutomobiles/>}></Route>
           <Route path="automobileform" element={<AutomobileForm/>}></Route>
+          <Route path="/manufacturers" element={<ManufacturerList />} />
+          <Route path="/manufacturers/create" element={<ManufacturerForm />} />
+          <Route path="/models" element={<ModelList />} />
+          <Route path="/models/create" element={<ModelForm />} />
+          <Route path="/technicians" element={<TechnicianList />} />
+          <Route path="/technicians/create" element={<TechnicianForm />} />
+          <Route path="/appointments/" element={<AppointmentList />} />
+          <Route path="/appointments/create" element={<AppointmentForm />} />
+          <Route path="/appointments/history" element={<ServiceHistoryList />} />
         </Routes>
       </div>
     </BrowserRouter>
