@@ -9,18 +9,22 @@ root.render(
   </React.StrictMode>
 );
 
-async function SalespeopleList() {
-  const response = await fetch('http://localhost:8090/api/salespeople/');
-  if (response.ok) {
-    const data = await response.json();
+async function fetchDataAndRenderApp() {
+  const salespeopleResponse = await fetch('http://localhost:8090/api/salespeople/');
+  const customersResponse = await fetch('http://localhost:8090/api/customers/');
+
+  if (salespeopleResponse.ok && customersResponse.ok) {
+    const salespeopleData = await salespeopleResponse.json();
+    const customersData = await customersResponse.json();
+
     root.render(
       <React.StrictMode>
-        <App salespeople={data.salespeople} />
+        <App salespeople={salespeopleData.salespeople} customers={customersData.customers} />
       </React.StrictMode>
     );
   } else {
-    console.error('Error fetching salesPeople data');
+    console.error('Error fetching data');
   }
 }
 
-SalespeopleList();
+fetchDataAndRenderApp();

@@ -4,6 +4,8 @@ import Nav from './Nav';
 import CreateSalesPerson from './CreateSalesPerson';
 import ListSalesPeople from './ListSalesPeople';
 import AddCustomer from './AddCustomer';
+import ListCustomers from './ListCustomers';
+import SaleForm from './NewSale';
 
 function App(props) {
   return (
@@ -15,6 +17,8 @@ function App(props) {
           <Route path="create" element={<CreateSalesPerson/>}/>
           <Route path="salespeople" element={<ListSalesPeople salespeople={props.salespeople}/>}></Route>
           <Route path="addcustomer" element={<AddCustomer/>}/>
+          <Route path="customerlist" element={<ListCustomers customers={props.customers}/>}></Route>
+          <Route path="salesform" element={<SaleForm/>}/>
         </Routes>
       </div>
     </BrowserRouter>
