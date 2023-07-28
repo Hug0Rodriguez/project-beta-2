@@ -80,7 +80,6 @@ function SaleForm(){
 
         if (automobilesFetch.ok && customersFetch.ok && salesPeopleFetch.ok){
             const automobileData = await automobilesFetch.json();
-            console.log(automobileData);
             const unsoldAutomobiles = automobileData.autos.filter(
                 automobile => automobile.sold === false
             );
