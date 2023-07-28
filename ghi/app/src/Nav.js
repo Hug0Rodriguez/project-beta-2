@@ -16,15 +16,13 @@ function Nav() {
                 <NavLink className="nav-link active" aria-current="page" to="customerlist">Customer List</NavLink>
                 <NavLink className="nav-link active" aria-current="page" to="salespeople">Sales People List</NavLink>
                 <NavLink className="nav-link active" aria-current="page" to="saleslist">Sales List</NavLink>
-                <NavLink className="nav-link active" aria-current="page" to="automobilelist">Automobile Listt</NavLink>
-                <NavLink className="nav-link active" aria-current="page" to="automobileform">Automobile Listt</NavLink>
+                <NavLink className="nav-link active" aria-current="page" to="automobilelist">Automobile List</NavLink>
+                <NavLink className="nav-link active" aria-current="page" to="automobileform">Automobile Form</NavLink>
             </li>
             <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="/manufacturers">Manufacturers</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="/manufacturers/create">Create a Manufacturer</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="/models">Models</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="/models/create">Create a Model</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="/automobiles">Automobiles</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="/automobiles/create">Create an Automobile</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="/technicians">Technicians</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="/technicians/create">Add a Technician</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="/appointments/">Appointments</NavLink></li>
